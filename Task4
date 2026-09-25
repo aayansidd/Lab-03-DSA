@@ -1,0 +1,42 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+struct Student{
+	int rollno;
+	string name;
+	int marks;
+};
+
+void display(const Student* s){
+	cout << "Rollno: " << s->rollno << endl;
+	cout << "Marks: " << s->marks << endl;
+	cout << "Name:" << s->name << endl;;
+}
+
+void updateMarks(Student* s, float newMarks){
+	s->marks = newMarks;
+}
+
+
+int main(){
+	Student *p = new Student; //pointer to an record
+
+	cout << "Enter rollno: ";
+	cin >> (*p).rollno;  //derefencing object
+
+	cout << "Enter name: ";
+	cin >> (*p).name;
+
+	cout << "Enter marks: ";
+	cin >> (*p).marks;
+	display(p);
+	updateMarks(p, 86.4);
+	display(p);
+
+	delete p;
+	p = nullptr;
+
+
+}
