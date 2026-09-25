@@ -27,13 +27,7 @@ void display(Student* s) {
 	}
 }
 
-bool createRecord(Student*& s1) {
-	if (displayIfExists(s1) == true) {
-		return false;
-	}
-	else {
-		s1 = new Student;
-
+void createRecord(Student*& s1) {
 		cout << "Enter rollno: ";
 		cin >> s1->rollno;
 		cin.ignore();
@@ -43,8 +37,7 @@ bool createRecord(Student*& s1) {
 
 		cout << "Enter marks: ";
 		cin >> s1->marks;
-		return true;
-	}
+
 }
 
 void updateMarks(Student* s) {
@@ -89,23 +82,18 @@ int main() {
 		cout << "5. Exit" << endl;
 		cout << "Enter choice: ";
 
-		if (!(cin >> value)) {
-			// Handle non-numeric menu input gracefully
-			cin.clear();
-			cin.ignore(numeric_limits<streamsize>::max(), '\n');
-			cout << "Invalid entry. Please enter a number." << endl;
-			continue;
-		}
+		cin >> value;
 
 		switch (value) {
 		case 1:
-			if (createRecord(p)) {
-				cout << "Record created successfully." << endl;
-			}
-			else {
-				cout << "Record already exists." << endl;
-			}
-			break;
+				if (displayIfExists(p) == false){
+					p = new Student();
+					createRecord(p);
+					cout << "Record created successfully";
+				} else {
+					cout << "Record already exists";
+				}
+				break;
 		case 2:
 			display(p);
 			break;
@@ -119,7 +107,7 @@ int main() {
 			cout << "Exiting program..." << endl;
 			break;
 		default:
-			cout << "Invalid option. Select 1 to 5." << endl;
+			cout << "Invalid option" << endl;
 			break;
 		}
 	}
