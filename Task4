@@ -25,9 +25,9 @@ int main(){
 
 	cout << "Enter rollno: ";
 	cin >> (*p).rollno;  //derefencing object
-
+	cin.ignore();
 	cout << "Enter name: ";
-	cin >> (*p).name;
+	getline(cin, (*p).name);
 
 	cout << "Enter marks: ";
 	cin >> (*p).marks;
