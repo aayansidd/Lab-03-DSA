@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+
+struct Student{
+	int rollno;
+	string name;
+	int marks;
+};	
+
+int main(){
+
+	Student *p = new Student;
+
+	cout << "Enter rollno: ";
+	cin >> (*p).rollno;
+
+	cout << "Enter name: ";
+	cin >> (*p).name;
+
+	cout << "Enter marks: ";
+	cin >> (*p).marks;
+
+
+	cout << "Rollno: " << p->rollno << endl;
+	p->marks = 50;
+	cout << "Marks: " << p->marks << endl;
+	cout << "Name:" << p->name << endl;
+
+
+}
