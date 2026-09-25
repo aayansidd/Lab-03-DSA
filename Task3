@@ -3,28 +3,28 @@
 using namespace std;
 
 
-struct Student{
+struct student{
 	int rollno;
 	string name;
 	int marks;
 };
 
 int main(){
-	Student *p = new Student; //pointer to an record
+	student *p = new student; //pointer to an record
 
-	cout << "Enter rollno: ";
+	cout << "enter rollno: ";
 	cin >> (*p).rollno;  //derefencing object
+	cin.ignore();
+	cout << "enter name: "; 
+	getline(cin, (*p).name);
 
-	cout << "Enter name: "; 
-	cin >> (*p).name;
-
-	cout << "Enter marks: ";
+	cout << "enter marks: ";
 	cin >> (*p).marks;
 
-	cout << "Rollno: " << p->rollno << endl;
+	cout << "rollno: " << p->rollno << endl;
 
-	cout << "Marks: " << p->marks << endl;
-	cout << "Name:" << p->name << endl;
+	cout << "marks: " << p->marks << endl;
+	cout << "name:" << p->name << endl;
 
 	delete p;
 	p = nullptr;
