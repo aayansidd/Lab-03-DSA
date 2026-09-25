@@ -1,43 +1,121 @@
+// Aayan Siddiqui 570014
+
 #include <iostream>
 #include <string>
+#include <limits> // Required for numeric_limits
 using namespace std;
 
-
-struct Student{
+struct Student {
 	int rollno;
 	string name;
-	int marks;
+	float marks;
 };
 
-void displayIfExists(const Student* s){
-	if (s == nullptr){
-		cout << "No record available" << endl;
+bool displayIfExists(const Student* s) {
+	return s != nullptr;
+}
+
+void display(Student* s) {
+	// Changed == false to == true, and added endl
+	if (displayIfExists(s) == true) {
+		cout << "rollno: " << s->rollno << endl;
+		cout << "marks: " << s->marks << endl;
+		cout << "name: " << s->name << endl;
 	}
-	else{
-		cout << "Record exists" << endl;
+	else {
+		cout << "Record does not exist" << endl;
 	}
 }
 
-int main(){
-	Student *s1;
-	s1 = nullptr;
-	displayIfExists(s1);
+void createRecord(Student*& s1) {
+		cout << "Enter rollno: ";
+		cin >> s1->rollno;
+		cin.ignore();
 
-	s1 = new Student;
-	cout << "Enter rollno: ";
-	cin >> (*s1).rollno;  //derefencing object
-	cin.ignore();
-	cout << "Enter name: ";
-	getline(cin, (*s1).name);
+		cout << "Enter name: ";
+		getline(cin, s1->name);
 
-	cout << "Enter marks: ";
-	cin >> (*s1).marks;
+		cout << "Enter marks: ";
+		cin >> s1->marks;
 
-	displayIfExists(s1);
+}
 
-	delete s1;
-	s1 = nullptr;
-	displayIfExists(s1);
+void updateMarks(Student* s) {
+	if (displayIfExists(s)) {
+		float newmarks;
+		cout << "Enter new marks: ";
+		cin >> newmarks;
+		s->marks = newmarks;
+
+		// Clear trailing newline
+		cin.ignore(numeric_limits<streamsize>::max(), '\n');
+		cout << "Marks updated successfully." << endl;
+	}
+	else {
+		cout << "Record does not exist." << endl;
+	}
+}
+
+void deleteRec(Student*& s) {
+	if (displayIfExists(s)) {
+		delete s;
+		s = nullptr;
+		cout << "Successfully deleted record." << endl;
+	}
+	else {
+		cout << "Record does not exist." << endl;
+	}
+}
+
+int main() {
+	int value = 0;
+	Student* p = nullptr;
+
+	while (value != 5) {
+		cout << "\n==================" << endl;
+		cout << "   Record Menu    " << endl;
+		cout << "==================" << endl;
+		cout << "1. Create Record" << endl;
+		cout << "2. Display Record" << endl;
+		cout << "3. Update Marks" << endl;
+		cout << "4. Delete Record" << endl;
+		cout << "5. Exit" << endl;
+		cout << "Enter choice: ";
+
+		cin >> value;
+
+		switch (value) {
+		case 1:
+				if (displayIfExists(p) == false){
+					p = new Student();
+					createRecord(p);
+					cout << "Record created successfully";
+				} else {
+					cout << "Record already exists";
+				}
+				break;
+		case 2:
+			display(p);
+			break;
+		case 3:
+			updateMarks(p);
+			break;
+		case 4:
+			deleteRec(p);
+			break;
+		case 5:
+			cout << "Exiting program..." << endl;
+			break;
+		default:
+			cout << "Invalid option" << endl;
+			break;
+		}
+	}
+
+	if (p != nullptr) {
+		delete p;
+		p = nullptr;
+	}
+
 	return 0;
-
 }
