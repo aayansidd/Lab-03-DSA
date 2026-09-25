@@ -1,0 +1,33 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+
+struct Student{
+	int rollno;
+	string name;
+	int marks;
+};
+int main(){
+	Student s1;
+	
+	cout << "Enter rollno: " << endl;
+	cin >> s1.rollno;
+	cout << endl;
+
+	cin.ignore();
+
+	cout << "Enter full name: " << endl;
+	getline(cin, s1.name);
+	cout << endl;
+
+	cout << "Enter marks: " << endl;
+	cin >> s1.marks;
+
+	cout << "Roll no: " << s1.rollno << endl;
+	cout << "Name: " << s1.name << endl;
+	cout << "Marks: " << s1.marks << endl;
+
+
+
+}
